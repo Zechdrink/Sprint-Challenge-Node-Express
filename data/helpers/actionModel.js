@@ -16,17 +16,20 @@ module.exports = {
       return actions.map(action => mappers.actionToBody(action));
     });
   },
+
   insert: function(action) {
     return db('actions')
       .insert(action)
       .then(([id]) => this.get(id));
   },
+
   update: function(id, changes) {
     return db('actions')
       .where('id', id)
       .update(changes)
       .then(count => (count > 0 ? this.get(id) : null));
   },
+  
   remove: function(id) {
     return db('actions')
       .where('id', id)
